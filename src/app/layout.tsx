@@ -20,6 +20,13 @@ const googleSans = localFont({
 export const metadata: Metadata = {
   title: "AetrVoid",
   description: "Kare's personal portfolio (waifus showcase) website showcasing projects, skills, and experience in web development and design.",
+  icons: {
+    icon: {
+        url: "/void_logo.png",
+        sizes: "300x300", // Untuk resolusi tinggi/mobile
+        type: "image/png",
+      },
+  },
 };
 
 export default function RootLayout({

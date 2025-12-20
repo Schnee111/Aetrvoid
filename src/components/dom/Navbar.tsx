@@ -57,10 +57,22 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
           }`}
         >
           {/* LOGO */}
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <Code2 size={20} className="text-white" />
             <span className="font-bold text-white tracking-tight">Schnee.</span>
-          </div>
+          </div> */}
+
+          {/* LOGO */}
+            <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="relative w-6 h-6">
+                {/* Aksen lingkaran oranye (Void) */}
+                <div className="absolute inset-0 border-2 border-amber-500 rounded-full border-t-transparent animate-spin-slow" />
+                <div className="absolute inset-1 border border-white/20 rounded-full" />
+            </div>
+            <span className="font-bold text-white tracking-tighter text-lg group-hover:text-amber-500 transition-colors">
+                Aetr<span className="text-amber-500 group-hover:text-white transition-colors">Void</span>
+            </span>
+            </div>
 
           {/* MENU LINKS + DROPDOWN (DESKTOP) */}
           <div className="hidden md:flex items-center gap-8">
