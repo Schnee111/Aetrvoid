@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Target, Flame, Ghost, Sparkles, Orbit } from "lucide-react";
+import { Zap, Target, Flame, Ghost, Sparkles, EarthIcon, Orbit } from "lucide-react";
 
 // Data narasi "Main-Main" dalam Bahasa Inggris
 const loreData = [
@@ -10,7 +10,7 @@ const loreData = [
     title: "The Initial Spawn",
     org: "Earth Sector",
     type: "Origin",
-    icon: Sparkles,
+    icon: EarthIcon,
     description: "Successfully spawned into the world. Initial stats were low, but the curiosity meter was already maxed out.",
   },
   {
