@@ -122,9 +122,11 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
              <a href="https://github.com/Schnee111" target="_blank" className="hidden sm:block text-gray-400 hover:text-white transition-colors">
                <Github size={20} />
              </a>
-             <button className="hidden md:block px-5 py-2 bg-white text-black text-[10px] font-bold rounded-full hover:scale-105 transition-all active:scale-95">
-               LET'S TALK
-             </button>
+             <a href="https://api.whatsapp.com/send?phone=6281321918632" className="w-full sm:w-auto">
+                <button className="hidden md:block px-5 py-2 bg-white text-black text-[10px] font-bold rounded-full hover:scale-105 transition-all active:scale-95">
+                LET'S TALK
+                </button>
+            </a>
              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white">
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
              </button>

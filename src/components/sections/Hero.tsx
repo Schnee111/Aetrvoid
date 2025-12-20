@@ -51,7 +51,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 w-full sm:w-auto px-6 sm:px-0"
         >
-        <a href="https://api.whatsapp.com/send?phone=6281321918632" className="w-full sm:w-auto">
+        <a href="mailto:daffam1357@upi.edu" className="w-full sm:w-auto">
           <button className="pointer-events-auto w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.2)]">
             Initiate Contact
           </button>
