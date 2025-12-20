@@ -19,7 +19,7 @@ const loreData = [
     org: "Digital Realm",
     type: "Class Change",
     icon: Zap,
-    description: "Discovered the forbidden arts of Programming. Transmuted coffee into the first 'Hello World' spell. Mana pool increased significantly.",
+    description: "Discovered the forbidden arts of Programming. Transmuted matcha into the first 'Hello World' spell. Mana pool increased significantly.",
   },
   {
     year: "Present Day",

@@ -73,7 +73,7 @@ const ProjectDetails = ({
                 </span>
             </div>
             
-            <h3 className="text-xl md:text-4xl text-white font-bold leading-tight cursor-default">
+            <h3 className="text-xl md:text-4xl text-white font-base leading-tight cursor-default">
               {project.title}
             </h3>
         </motion.div>
@@ -132,7 +132,7 @@ export default function Projects() {
        <div className="container mx-auto px-4 md:px-12 lg:px-24">
           
           <div className="py-16 md:py-32 text-center md:text-left">
-             <h2 className="text-[10px] md:text-xs font-mono text-amber-500/50 mb-3 uppercase tracking-[0.5em]">
+             <h2 className="text-[10px] md:text-sm font-mono text-amber-500/50 mb-3 uppercase tracking-[0.5em]">
                Selected Waifus
              </h2>
              <p className="text-2xl md:text-6xl text-white max-w-4xl tracking-tighter font-medium">
