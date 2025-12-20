@@ -21,9 +21,9 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-amber-500/5" />
         
         <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
-           <h3 className="text-xl md:text-3xl text-white font-bold uppercase tracking-widest drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+           {/* <h3 className="text-xl md:text-3xl text-white font-bold uppercase tracking-widest drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
             {project.title}
-           </h3>
+           </h3> */}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Zap, Target, Flame, Ghost, Sparkles, EarthIcon, Orbit } from "lucide-re
 // Data narasi "Main-Main" dalam Bahasa Inggris
 const loreData = [
   {
-    year: "Era 2004",
+    year: "Era 2005",
     title: "The Initial Spawn",
     org: "Earth Sector",
     type: "Origin",
@@ -14,7 +14,7 @@ const loreData = [
     description: "Successfully spawned into the world. Initial stats were low, but the curiosity meter was already maxed out.",
   },
   {
-    year: "Circa 2019",
+    year: "Circa 2023",
     title: "Awakening of the Code",
     org: "Digital Realm",
     type: "Class Change",
