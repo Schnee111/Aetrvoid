@@ -171,7 +171,7 @@ function ParallaxCamera() {
 
 export default function Background3D() {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-black">
+    <div className="fixed top-0 left-0 w-full h-[100vh] sm:h-[100lvh] z-0 pointer-events-none bg-black">
       <Canvas
         camera={{ position: [0, 2.5, 9], fov: 45 }}
         gl={{ 
