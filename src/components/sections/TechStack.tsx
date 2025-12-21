@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-// 1. Tambahkan import 'Variants'
-import { motion, Variants } from "framer-motion";
+import React from "react"; // Hapus useState
+// 1. Import useMotionValue & useMotionTemplate
+import { motion, Variants, useMotionValue, useMotionTemplate } from "framer-motion";
 import { 
   SiPython, SiPytorch, SiNextdotjs, SiReact, 
   SiSolidity, SiDocker, SiGit, SiFastapi
@@ -21,37 +21,33 @@ const voidArsenal = [
   { name: "Git", icon: SiGit, lore: "Time Traveler's Save Point", tier: "Essential", color: "group-hover:text-red-500" },
 ];
 
-// --- ANIMATION VARIANTS (FIXED TYPESCRIPT) ---
-// 2. Berikan tipe eksplisit ': Variants' di sini
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
-// 3. Berikan tipe eksplisit ': Variants' di sini juga
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { 
-        duration: 0.5, 
-        ease: "easeOut" // Sekarang TS tahu ini valid
-    }
+    transition: { duration: 0.5, ease: "easeOut" }
   },
 };
 
 export default function TechStack() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // 2. GANTI STATE DENGAN MOTION VALUE (Ringan, Bypass React Render Cycle)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    // Update value langsung ke DOM tanpa re-render komponen
+    mouseX.set(e.clientX - left);
+    mouseY.set(e.clientY - top);
   };
 
   return (
@@ -59,12 +55,8 @@ export default function TechStack() {
         className="relative z-10 py-24 md:py-40 bg-black overflow-hidden"
         onMouseMove={handleMouseMove}
     >
-
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_60%,transparent)]" />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-0 pointer-events-none" />
-
-      {/* Ambient Glow */}
-      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" /> */}
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         
@@ -106,55 +98,44 @@ export default function TechStack() {
               variants={cardVariants}
               className="group relative h-36 md:h-40 rounded-2xl bg-black/80 md:bg-black/20 border border-white/10 overflow-hidden hover:bg-white/[0.03] transition-colors duration-300 backdrop-blur-none md:backdrop-blur-md"
             >
-              {/* SPOTLIGHT EFFECT (Tetap) */}
-              <div 
-                className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-300"
+              {/* 3. OPTIMASI SPOTLIGHT:
+                  - hidden md:block: Sembunyikan total di mobile (Hemat GPU)
+                  - useMotionTemplate: Update style langsung via GPU tanpa lewat React JS thread
+              */}
+              <motion.div 
+                className="hidden md:block pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-300"
                 style={{
-                    background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.06), transparent 40%)` 
+                    background: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.06), transparent 40%)` 
                 }}
                />
                
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 border border-amber-500/30 rounded-2xl transition-opacity duration-500" />
               
-              {/* Padding Internal: p-4 (Mobile) vs p-6 (Desktop) */}
               <div className="relative h-full p-4 md:p-6 flex flex-col justify-between z-10">
-                
-                {/* Top Part: Icon & Tier */}
                 <div className="flex justify-between items-start">
-                    {/* Icon Box: Lebih kecil di mobile (p-2) */}
                     <div className={`p-2 md:p-3 rounded-xl bg-black/50 border border-white/10 group-hover:border-amber-500/20 transition-all duration-300 ${item.color} text-gray-400`}>
-                        {/* Icon Size: 20px (Mobile) vs 28px (Desktop) */}
                         <item.icon className="w-5 h-5 md:w-7 md:h-7" />
                     </div>
-                    
-                    {/* Tier Text: Lebih kecil di mobile */}
                     <span className="text-[8px] md:text-[9px] font-mono text-gray-600 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
                         [{item.tier}]
                     </span>
                 </div>
 
-                {/* Bottom Part: Name & Lore */}
                 <div>
-                  {/* Name Text: text-sm (Mobile) vs text-lg (Desktop) */}
                   <h4 className="text-sm md:text-lg font-base text-white mb-1 group-hover:translate-x-1 transition-transform duration-300">
                     {item.name}
                   </h4>
-                  
                   <div className="overflow-hidden h-0 group-hover:h-auto opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-                      {/* Lore Text: Hide di layar sangat kecil jika perlu, atau text-[9px] */}
                       <p className="text-[9px] md:text-[10px] text-amber-500/80 font-mono pt-1 leading-tight">
                         &gt; {item.lore}
                       </p>
                   </div>
-                  
                   <div className="group-hover:hidden transition-all duration-300">
                       <div className="h-0.5 w-6 md:w-8 bg-white/10 mt-2" />
                   </div>
                 </div>
-
               </div>
 
-              {/* Decorative Corner */}
               <div className="absolute bottom-0 right-0 p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Network size={10} className="md:w-3 md:h-3 text-amber-500/40" />
               </div>

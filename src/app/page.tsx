@@ -60,7 +60,7 @@ export default function Home() {
       </section>
 
       {/* TechStack */}
-      <section id="tech" className="relative z-20">
+      <section id="tech" className="relative z-20 pb-32">
         <TechStack />
       </section>
 
@@ -81,18 +81,14 @@ export default function Home() {
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)'
                    }}
                 >
-                   {/* PENTING: Tag Video HTML5 
-                      - autoPlay loop muted: Wajib agar jalan otomatis.
-                      - playsInline: WAJIB UNTUK IPHONE (kalau tidak, video akan fullscreen otomatis).
-                      - poster: Gambar thumbnail ringan yang muncul duluan sebelum video selesai loading (biar tidak blank hitam).
-                   */}
+                    {/* VIDEO HTML5 */}
                    <video
                      autoPlay
                      loop
                      muted
                      playsInline
-                     poster="/images/angel-preview.jpg" // Opsional: Buat screenshot frame pertama video
-                     className="w-full h-full object-cover opacity-80"
+                     poster="/images/angel-preview.jpg"
+                     className="w-full h-full object-cover"
                    >
                      {/* Ganti path sesuai lokasi video Anda */}
                      <source src="/videos/bg-video.mp4" type="video/mp4" />
@@ -100,7 +96,7 @@ export default function Home() {
                 </div>
                 
                 {/* Overlay tetap diperlukan agar teks di atasnya terbaca */}
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/50" />
             </motion.div>
         </div>
 
