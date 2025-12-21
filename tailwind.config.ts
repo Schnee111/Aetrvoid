@@ -16,6 +16,10 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-google-sans)", "ui-sans-serif", "system-ui"],
       },
+      animation: {
+        "spin-slow": "spin 4s linear infinite", 
+        "spin-slower": "spin 5s linear infinite", 
+      },
     },
   },
   plugins: [],
