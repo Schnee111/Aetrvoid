@@ -67,7 +67,7 @@ export default function Hero() {
               {/* Kata: Entity */}
               <div className="overflow-hidden p-4 -m-4">
                  <motion.h1 
-                    initial={{ y: "130%" }} 
+                    initial={{ y: "140%" }} 
                     animate={{ y: 0 }} 
                     transition={{ ease: SMOOTH_EASE, duration: 1.2, delay: 0.2 }}
                     // Shadow hitam pekat
@@ -80,7 +80,7 @@ export default function Hero() {
               {/* Kata: Katsukare */}
               <div className="overflow-hidden p-4 -m-4">
                  <motion.h1 
-                    initial={{ y: "130%" }} 
+                    initial={{ y: "140%" }} 
                     animate={{ y: 0 }} 
                     transition={{ ease: SMOOTH_EASE, duration: 1.2, delay: 0.35 }}
                     // Shadow glow amber yang lebar
