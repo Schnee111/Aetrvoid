@@ -18,6 +18,7 @@ const googleSans = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://aetr.space'),
   title: "AetrVoid",
   description: "Kare's personal portfolio (waifus showcase) website showcasing projects, skills, and experience in web development and design.",
   icons: {
