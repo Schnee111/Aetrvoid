@@ -23,7 +23,7 @@ const backgroundMap = {
 };
 
 export default function Home() {
-  const [activeBG, setActiveBG] = useState<keyof typeof backgroundMap>("redmoon");
+  const [activeBG, setActiveBG] = useState<keyof typeof backgroundMap>("moon");
   const ActiveBackground = backgroundMap[activeBG];
 
   // --- SETUP PARALLAX PROJECTS ---
