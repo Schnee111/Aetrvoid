@@ -37,16 +37,16 @@ export default function Home() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1.0]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  // --- SETUP PARALLAX: footer ---
-  const footerRef = useRef(null);
-  const { scrollYProgress: footerScroll } = useScroll({
-    target: footerRef,
-    offset: ["start end", "end end"] // Mulai saat footer masuk, selesai saat mentok bawah
+  // --- SETUP PARALLAX: STATS
+  const statsRef = useRef(null);
+  const { scrollYProgress: statsScroll } = useScroll({
+    target: statsRef,
+    offset: ["start end", "end start"] 
   });
 
-  // Animasi Parallax Footer
-  const yFooter = useTransform(footerScroll, [0, 1], ["-20%", "0%"]); 
-  const opacityFooter = useTransform(footerScroll, [0, 0.3, 0.8, 1], [0, 1, 1, 0.6]);
+  const yStats = useTransform(statsScroll, [0, 1], ["-10%", "20%"]); 
+  const scaleStats = useTransform(statsScroll, [0, 1], [1.2, 1.0]);
+  const opacityStats = useTransform(statsScroll, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <main className="relative w-full min-h-screen bg-black text-white font-sans selection:bg-white/30">
@@ -114,53 +114,63 @@ export default function Home() {
       </div>
 
       {/* Section Stats */}
-      <div id="stats" className="relative z-20 py-20 bg-black flex items-center justify-center">
-        {/* Dekorasi Grid Tipis (Opsional) */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      {/* Section Stats */}
+      <div id="stats" ref={statsRef} className="relative z-20 py-40 overflow-hidden min-h-[90vh] flex items-center bg-black">
         
-        <div className="relative z-10 container mx-auto flex justify-center">
-          <StatsRadar />
-        </div>
-      </div>
-
-      <section id="contact" ref={footerRef} className="relative z-20 min-h-[80vh] flex items-end bg-black overflow-hidden">
-        
-        {/* PARALLAX VIDEO GARGANTUA */}
-        <div className="absolute inset-0 z-0">
+        {/* PARALLAX VIDEO STATS */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
-              style={{ y: yFooter, opacity: opacityFooter, willChange: "transform" }}
-              className="relative w-full h-[100%]" // Dibuat lebih tinggi untuk parallax
+              style={{ 
+                  y: yStats, 
+                  scale: scaleStats, 
+                  opacity: opacityStats, 
+                  willChange: "transform", 
+                  backfaceVisibility: "hidden" 
+              }}
+              className="relative w-full h-[100vh] sm:h-[100lvh] -bottom-[10vh]"
             >
+               {/* MASKING CONTAINER */}
                <div 
                    className="w-full h-full transform-gpu"
                    style={{
-                      // Masking: Atas transparan (menyatu dengan Stats), Bawah agak gelap
-                      maskImage: 'linear-gradient(to bottom, transparent 10%, black 40%, black 90%, black 100%)',
-                      WebkitMaskImage: 'linear-gradient(to bottom, transparent 10%, black 40%, black 90%, black 100%)'
+                      maskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)'
                    }}
                 >
+                   {/* VIDEO TAG HTML5 */}
                    <video
                      autoPlay
                      loop
                      muted
                      playsInline
+                     // Poster wajib ada agar tidak "blink" hitam saat loading
                      poster="/images/gargantua-preview.jpg" 
-                     className="w-full h-full object-cover" // Opacity dikurangi agar teks terbaca
+                     className="w-full h-full object-cover"
                    >
+                     {/* Ganti path video sesuai lokasi file Anda */}
                      <source src="/videos/gargantua.mp4" type="video/mp4" />
                    </video>
                 </div>
-                
-                {/* Overlay Gradient agar teks Footer Kontras */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+
+                <div className="absolute inset-0 bg-black/70" />
             </motion.div>
         </div>
 
-        {/* COMPONENT FOOTER */}
-        <div className="relative z-10 w-full">
-            <Footer />
-        </div>
+        {/* Gradient Connector Atas */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
 
+        {/* Content Radar */}
+        <div className="relative z-20 container mx-auto flex justify-center">
+          <StatsRadar />
+        </div>
+        
+        {/* Gradient Connector Bawah */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
+
+      </div>
+
+      <section id="contact">
+        <Footer />
       </section>
 
     </main>

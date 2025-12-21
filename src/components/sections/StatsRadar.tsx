@@ -16,7 +16,6 @@ export default function StatsRadar() {
   const radius = size * 0.4;
   const angleStep = (Math.PI * 2) / 5;
 
-  // Fungsi untuk menghitung koordinat titik berdasarkan sudut dan nilai
   const getPoint = (index: number, val: number, max: number) => {
     const r = (val / max) * radius;
     const angle = index * angleStep - Math.PI / 2;
@@ -26,7 +25,6 @@ export default function StatsRadar() {
     };
   };
 
-  // Membuat string path untuk area statistik
   const statsPath = playerStats
     .map((s, i) => {
       const p = getPoint(i, s.value, s.full);
@@ -34,7 +32,6 @@ export default function StatsRadar() {
     })
     .join(" ") + " Z";
 
-  // Membuat garis panduan (segi lima luar)
   const gridPath = playerStats
     .map((_, i) => {
       const p = getPoint(i, 100, 100);
@@ -44,16 +41,32 @@ export default function StatsRadar() {
 
   return (
     <section className="relative z-10 py-16 flex flex-col items-center">
+      
+      {/* Header dengan Animasi Fade Up */}
       <div className="mb-10 text-center">
-        <h2 className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.3em] mb-2">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.5em] mb-2"
+        >
           Attribute Analysis
-        </h2>
-        <h3 className="text-2xl font-medium text-white">Skill <span className="text-gray-500">Capabilities.</span></h3>
+        </motion.h2>
+        <motion.h3 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-2xl md:text-4xl font-medium text-white"
+        >
+          Skill <span className="text-gray-500">Capabilities.</span>
+        </motion.h3>
       </div>
 
       <div className="relative flex items-center justify-center">
         <svg width={size} height={size} className="overflow-visible">
-          {/* Garis Grid Luar */}
+          {/* Grid Luar */}
           <path
             d={gridPath}
             fill="none"
@@ -62,7 +75,7 @@ export default function StatsRadar() {
             strokeWidth="1"
           />
           
-          {/* Garis Jari-jari (Sumbu) */}
+          {/* Garis Jari-jari */}
           {playerStats.map((_, i) => {
             const p = getPoint(i, 100, 100);
             return (
@@ -78,35 +91,43 @@ export default function StatsRadar() {
             );
           })}
 
-          {/* Area Statistik dengan Animasi */}
+          {/* Area Statistik (Radar) */}
           <motion.path
             initial={{ d: `M ${center} ${center} L ${center} ${center} L ${center} ${center} L ${center} ${center} L ${center} ${center} Z`, opacity: 0 }}
             whileInView={{ d: statsPath, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            fill="rgba(255, 255, 255, 0.1)"
-            stroke="white"
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            fill="rgba(245, 158, 11, 0.1)" // Amber transparan (sesuai tema)
+            stroke="#f59e0b" // Garis Amber
             strokeWidth="2"
-            className="drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+            className="drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]"
           />
 
           {/* Label Statistik */}
           {playerStats.map((stat, i) => {
-            const p = getPoint(i, 120, 100); // Letakkan label sedikit di luar grid
+            const p = getPoint(i, 120, 100);
             return (
-              <text
+              <motion.text
                 key={i}
                 x={p.x}
                 y={p.y}
-                fill="#aa6d28ff"
+                // ANIMASI FIXED: Gunakan translateY (bukan scale) agar stabil di SVG
+                initial={{ opacity: 0, translateY: 10 }} 
+                whileInView={{ opacity: 1, translateY: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.8 + (i * 0.1), ease: "easeOut" }}
+                
+                // WARNA FIXED: Amber-500 (#f59e0b) sesuai Hero & Projects
+                fill="#f59e0b" 
                 fontSize="10"
                 fontFamily="monospace"
                 textAnchor="middle"
                 dominantBaseline="middle"
-                className="uppercase tracking-widest font-bold"
+                // Drop shadow warna Amber
+                className="uppercase tracking-widest font-bold drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]"
               >
                 {stat.label}
-              </text>
+              </motion.text>
             );
           })}
         </svg>
@@ -117,9 +138,15 @@ export default function StatsRadar() {
         </div>
       </div>
       
-      <p className="mt-8 text-[10px] text-gray-600 font-mono italic">
+      <motion.p 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="mt-8 text-[10px] text-gray-600 font-mono italic"
+      >
         *Stats are subject to change based on matcha intake.
-      </p>
+      </motion.p>
     </section>
   );
 }
