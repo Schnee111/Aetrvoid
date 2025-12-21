@@ -151,12 +151,12 @@ export default function TechStack() {
             transition={{ delay: 0.6 }}
             className="mt-12 md:mt-20 border-t border-white/5 pt-6 md:pt-8 flex flex-wrap justify-center md:justify-between gap-4 md:gap-6 text-gray-600 font-mono text-[9px] md:text-[10px] uppercase tracking-widest"
         >
-            <div className="flex items-center gap-2 hover:text-lime-500 transition-colors cursor-crosshair">
+            <div className="flex items-center gap-2 hover:text-lime-400 transition-colors cursor-crosshair">
                 <Coffee size={12} className="md:w-[14px] md:h-[14px]" /> 
                 <span>Matcha: <span className="text-white">88%</span></span>
             </div>
             <div className="hidden md:block w-px h-3 bg-white/10" />
-            <div className="flex items-center gap-2 hover:text-red-400 transition-colors cursor-crosshair">
+            <div className="flex items-center gap-2 hover:text-rose-400 transition-colors cursor-crosshair">
                 <Ghost size={12} className="md:w-[14px] md:h-[14px]" /> 
                 <span>Sanity: <span className="text-white">Crit</span></span>
             </div>
