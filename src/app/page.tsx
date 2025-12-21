@@ -69,7 +69,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
               style={{ y, scale, opacity }}
-              className="relative w-full h-[90vh] -bottom-[20vh]" // Height extra & posisi ditarik ke atas
+              className="relative w-full h-[90vh] sm:h-[90lvh] -bottom-[20vh]" 
             >
                 {/* GAMBAR */}
                 <div 
@@ -120,7 +120,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
               style={{ y: yStats, scale: scaleStats, opacity: opacityStats }}
-              className="relative w-full h-[100vh] -bottom-[10vh]"
+              className="relative w-full h-[100vh] sm:h-[100lvh] -bottom-[10vh]"
             >
                {/* MASKING IMAGE */}
                <div 
