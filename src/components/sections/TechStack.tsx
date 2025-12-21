@@ -104,9 +104,7 @@ export default function TechStack() {
             <motion.div
               key={i}
               variants={cardVariants}
-              // RESPONSIVE CARD HEIGHT & PADDING:
-              // h-36 (Mobile) vs h-40 (Desktop)
-              className="group relative h-36 md:h-40 rounded-2xl bg-black/20 border border-white/10 overflow-hidden hover:bg-white/[0.03] transition-colors duration-300 backdrop-blur"
+              className="group relative h-36 md:h-40 rounded-2xl bg-black/80 md:bg-black/20 border border-white/10 overflow-hidden hover:bg-white/[0.03] transition-colors duration-300 backdrop-blur-none md:backdrop-blur-md"
             >
               {/* SPOTLIGHT EFFECT (Tetap) */}
               <div 
