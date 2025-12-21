@@ -64,7 +64,7 @@ export default function TechStack() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-0 pointer-events-none" />
 
       {/* Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" />
+      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" /> */}
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         
