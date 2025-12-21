@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { ChevronDown, Code2, Github, Menu, Palette, X } from "lucide-react";
+import { ChevronDown, Github, Menu, Palette, X, ArrowRight } from "lucide-react";
 
 interface NavbarProps {
   onBGChange: (id: "blackhole" | "moon" | "redmoon" | "ori" | "nebula") => void;
@@ -13,7 +13,7 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
   const [isHidden, setIsHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State untuk hover/click
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
   const { scrollY } = useScroll();
   const [lastY, setLastY] = useState(0);
@@ -57,15 +57,8 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
           }`}
         >
           {/* LOGO */}
-          {/* <div className="flex items-center gap-2">
-            <Code2 size={20} className="text-white" />
-            <span className="font-bold text-white tracking-tight">Schnee.</span>
-          </div> */}
-
-          {/* LOGO */}
-            <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="flex items-center gap-2 group cursor-pointer relative z-50">
             <div className="relative w-6 h-6">
-                {/* Aksen lingkaran oranye (Void) */}
                 <div className="absolute inset-0 border-2 border-amber-500 rounded-full border-t-transparent animate-spin-slow" />
                 <div className="absolute inset-1 border border-white/20 rounded-full" />
             </div>
@@ -74,12 +67,10 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
             </span>
             </div>
 
-          {/* MENU LINKS + DROPDOWN (DESKTOP) */}
+          {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center gap-8">
-            
-            {/* DROPDOWN AREA WITH HOVER LOGIC */}
             <div 
-              className="relative py-2" // py-2 memberi area "aman" agar dropdown tidak tertutup saat kursor bergerak ke bawah
+              className="relative py-2"
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
@@ -139,38 +130,97 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
                 LET'S TALK
                 </button>
             </a>
-             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white">
+             {/* Mobile Menu Toggle - Pastikan Z-Index tinggi */}
+             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white relative z-50 p-2">
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
              </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE MENU OVERLAY */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden"
+            initial={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at 100% 0%)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at 100% 0%)" }}
+            transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed inset-0 z-40 bg-black/75 backdrop-blur-xl flex flex-col md:hidden overflow-y-auto"
           >
-             {menuItems.map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-bold text-white uppercase tracking-tighter hover:text-gray-400 transition-colors">
-                  {item}
-                </a>
-             ))}
+             <div className="flex flex-col items-center justify-start pt-28 pb-10 min-h-screen gap-8">
+               
+               {/* 1. NAVIGATION LINKS */}
+               <nav className="flex flex-col items-center gap-5 w-full">
+                 {menuItems.map((item, i) => (
+                    <motion.a
+                      key={item}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + (i * 0.05) }}
+                      href={`#${item.toLowerCase()}`} 
+                      onClick={() => setIsMobileMenuOpen(false)} 
+                      className="group flex items-center gap-3 text-2xl font-light text-white uppercase tracking-[0.2em] hover:text-amber-500 transition-colors"
+                    >
+                      <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 text-amber-500">
+                        <ArrowRight size={20} />
+                      </span>
+                      {item}
+                    </motion.a>
+                 ))}
+               </nav>
 
-             <div className="flex items-center gap-4">
-             <a href="https://github.com/Schnee111" target="_blank" className="hidden sm:block text-gray-400 hover:text-white transition-colors">
-               <Github size={20} />
-             </a>
-             <a href="https://api.whatsapp.com/send?phone=6281321918632" className="w-full sm:w-auto">
-                <button className="hidden md:block px-5 py-2 bg-white text-black text-[10px] font-bold rounded-full hover:scale-105 transition-all active:scale-95">
-                LET'S TALK
-                </button>
-            </a>
-          </div>
+               <div className="w-16 h-px bg-white/10" />
+
+               {/* 2. BACKGROUND SELECTOR (GRID LAYOUT) */}
+               <div className="flex flex-col items-center gap-4 w-full px-6 max-w-sm">
+                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.25em] flex items-center gap-2">
+                     <Palette size={12} /> System Atmosphere
+                  </span>
+                  
+                  {/* Grid 2 Kolom agar lebih rapi */}
+                  <div className="grid grid-cols-2 gap-2 w-full">
+                      {bgOptions.map((opt) => (
+                          <button
+                              key={opt.id}
+                              onClick={() => {
+                                  onBGChange(opt.id);
+                                  setIsMobileMenuOpen(false);
+                              }}
+                              className={`relative py-3 px-2 rounded-lg border text-[10px] font-medium uppercase tracking-widest transition-all overflow-hidden group ${
+                                  currentBG === opt.id
+                                  ? "border-amber-500 text-amber-500 bg-amber-500/10 shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+                                  : "border-white/10 text-gray-400 bg-white/5 hover:bg-white/10 hover:text-white hover:border-white/20"
+                              }`}
+                          >
+                              {/* Indikator aktif kecil */}
+                              {currentBG === opt.id && (
+                                <span className="absolute top-1.5 right-1.5 w-1 h-1 bg-amber-500 rounded-full animate-pulse" />
+                              )}
+                              {opt.name}
+                          </button>
+                      ))}
+                  </div>
+               </div>
+
+               <div className="w-16 h-px bg-white/10" />
+
+               {/* 3. FOOTER ACTIONS */}
+               <div className="flex flex-col items-center gap-6 mt-2">
+                   <a href="https://github.com/Schnee111" target="_blank" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
+                     <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
+                        <Github size={18} /> 
+                     </div>
+                     <span className="text-xs font-mono tracking-widest uppercase">Schnee111</span>
+                   </a>
+                   
+                   <a href="https://api.whatsapp.com/send?phone=6281321918632">
+                      <button className="px-10 py-3 bg-white text-black text-xs font-bold rounded-full hover:scale-105 transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] tracking-widest">
+                        INITIATE CONTACT
+                      </button>
+                  </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
