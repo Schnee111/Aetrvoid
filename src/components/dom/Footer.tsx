@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Linkedin, Mail, Twitter, Terminal, Zap, Instagram } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Terminal, Zap, Instagram, Coffee } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -70,7 +70,7 @@ export default function Footer() {
             </div>
             <span className="text-gray-800">|</span>
             <div className="flex items-center gap-2">
-              <Zap size={10} className="text-amber-500" />
+              <Coffee size={10} className="text-amber-500" />
               <span>Matcha: 0%</span>
             </div>
           </div>
