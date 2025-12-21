@@ -70,7 +70,7 @@ export default function Footer() {
             </div>
             <span className="text-gray-800">|</span>
             <div className="flex items-center gap-2">
-              <Coffee size={10} className="text-lime-400" />
+              <Coffee size={10} className="text-lime-300/60" />
               <span>Matcha: 0%</span>
             </div>
           </div>
