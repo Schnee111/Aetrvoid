@@ -58,19 +58,19 @@ export default function Footer() {
         {/* Footer Bottom / System Info */}
         <div className="w-full border-t border-white/5 pt-10 flex flex-col md:flex-row items-center justify-between text-[10px] text-gray-600 font-mono uppercase tracking-[0.2em]">
           <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <p>© 2025 Muhammad Daffa</p>
+            <p>© 2025 Daffa | schnee | katsukare </p>
             <span className="hidden md:block w-1 h-1 bg-gray-800 rounded-full" />
             <p className="text-gray-800 italic">Built in the Digital Void</p>
           </div>
           
           <div className="flex gap-6 items-center">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500/50 animate-pulse" />
-              <span>Entity: Active</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-500/50 animate-pulse" />
+              <span>Entity: Sleep</span>
             </div>
             <span className="text-gray-800">|</span>
             <div className="flex items-center gap-2">
-              <Coffee size={10} className="text-amber-500" />
+              <Coffee size={10} className="text-lime-400" />
               <span>Matcha: 0%</span>
             </div>
           </div>
