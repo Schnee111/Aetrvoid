@@ -18,12 +18,12 @@ function ParticleSystem() {
     // GERAKKAN CAMERA untuk parallax yang benar - range lebih besar
     state.camera.position.x = THREE.MathUtils.lerp(
       state.camera.position.x,
-      -x * 1.2, // Diperbesar untuk parallax lebih terasa
+      -x * 1.0, // Diperbesar untuk parallax lebih terasa
       0.08 // Lerp lebih lambat untuk smoothness
     );
     state.camera.position.y = THREE.MathUtils.lerp(
       state.camera.position.y,
-      -y * 1.0, // Diperbesar untuk parallax lebih terasa
+      -y * 0.8, // Diperbesar untuk parallax lebih terasa
       0.08
     );
     
@@ -37,20 +37,20 @@ function ParticleSystem() {
 
     // LAYER 2: NEBULA - Wavy motion subtle (dikembalikan ke nilai awal)
     if (nebulaRef.current) {
-      nebulaRef.current.position.y = Math.sin(time * 0.3) * 0.15;
-      nebulaRef.current.position.x = Math.cos(time * 0.2) * 0.1;
+      nebulaRef.current.position.y = Math.sin(time * 0.05) * 0.1;
+      nebulaRef.current.position.x = Math.cos(time * 0.01) * 0.7;
     }
 
     // LAYER 3: MID SPARKLES - Wavy motion subtle
     if (midLayerRef.current) {
-      midLayerRef.current.position.y = Math.sin(time * 0.25) * 0.1;
-      midLayerRef.current.position.x = Math.cos(time * 0.18) * 0.08;
+      midLayerRef.current.position.y = Math.sin(time * 0.02) * 0.1;
+      midLayerRef.current.position.x = Math.cos(time * 0.015) * 0.08;
     }
 
     // LAYER 4: FOREGROUND - Wavy motion subtle
     if (foregroundRef.current) {
-      foregroundRef.current.position.y = Math.sin(time * 0.2) * 0.06;
-      foregroundRef.current.position.x = Math.cos(time * 0.15) * 0.04;
+      foregroundRef.current.position.y = Math.sin(time * 0.02) * 0.06;
+      foregroundRef.current.position.x = Math.cos(time * 0.03) * 0.04;
     }
   });
 

@@ -20,14 +20,14 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const diff = latest - lastY;
-    if (Math.abs(diff) > 5) {
-      if (diff > 0 && latest > 50 && !isMobileMenuOpen) { 
+    if (Math.abs(diff) > 3) {
+      if (diff > 0 && latest > 30 && !isMobileMenuOpen) { 
         setIsHidden(true);
       } else {
         setIsHidden(false);
       }
     }
-    setIsScrolled(latest > 50);
+    setIsScrolled(latest > 30);
     setLastY(latest);
   });
 
@@ -160,6 +160,17 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
                   {item}
                 </a>
              ))}
+
+             <div className="flex items-center gap-4">
+             <a href="https://github.com/Schnee111" target="_blank" className="hidden sm:block text-gray-400 hover:text-white transition-colors">
+               <Github size={20} />
+             </a>
+             <a href="https://api.whatsapp.com/send?phone=6281321918632" className="w-full sm:w-auto">
+                <button className="hidden md:block px-5 py-2 bg-white text-black text-[10px] font-bold rounded-full hover:scale-105 transition-all active:scale-95">
+                LET'S TALK
+                </button>
+            </a>
+          </div>
           </motion.div>
         )}
       </AnimatePresence>

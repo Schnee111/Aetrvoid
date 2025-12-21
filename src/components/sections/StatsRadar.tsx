@@ -43,7 +43,7 @@ export default function StatsRadar() {
     .join(" ") + " Z";
 
   return (
-    <section className="relative z-10 py-16 flex flex-col items-center bg-black">
+    <section className="relative z-10 py-16 flex flex-col items-center">
       <div className="mb-10 text-center">
         <h2 className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.3em] mb-2">
           Attribute Analysis
