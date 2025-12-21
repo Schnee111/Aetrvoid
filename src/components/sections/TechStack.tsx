@@ -98,16 +98,17 @@ export default function TechStack() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {voidArsenal.map((item, i) => (
             <motion.div
               key={i}
               variants={cardVariants}
-              // UBAH BARIS DI BAWAH INI:
-              className="group relative h-40 rounded-2xl bg-black/20 border border-white/10 overflow-hidden hover:bg-white/[0.03] transition-colors duration-300 backdrop-blur-md"
+              // RESPONSIVE CARD HEIGHT & PADDING:
+              // h-36 (Mobile) vs h-40 (Desktop)
+              className="group relative h-36 md:h-40 rounded-2xl bg-black/20 border border-white/10 overflow-hidden hover:bg-white/[0.03] transition-colors duration-300 backdrop-blur"
             >
-              {/* SPOTLIGHT EFFECT */}
+              {/* SPOTLIGHT EFFECT (Tetap) */}
               <div 
                 className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-300"
                 style={{
@@ -115,46 +116,49 @@ export default function TechStack() {
                 }}
                />
                
-              {/* Border Glow on Hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 border border-amber-500/30 rounded-2xl transition-opacity duration-500" />
               
-              <div className="relative h-full p-6 flex flex-col justify-between z-10">
+              {/* Padding Internal: p-4 (Mobile) vs p-6 (Desktop) */}
+              <div className="relative h-full p-4 md:p-6 flex flex-col justify-between z-10">
                 
                 {/* Top Part: Icon & Tier */}
                 <div className="flex justify-between items-start">
-                    <div className={`p-3 rounded-xl bg-black/50 border border-white/10 group-hover:border-amber-500/20 transition-all duration-300 ${item.color} text-gray-400`}>
-                        <item.icon size={28} />
+                    {/* Icon Box: Lebih kecil di mobile (p-2) */}
+                    <div className={`p-2 md:p-3 rounded-xl bg-black/50 border border-white/10 group-hover:border-amber-500/20 transition-all duration-300 ${item.color} text-gray-400`}>
+                        {/* Icon Size: 20px (Mobile) vs 28px (Desktop) */}
+                        <item.icon className="w-5 h-5 md:w-7 md:h-7" />
                     </div>
                     
-                    <span className="text-[9px] font-mono text-gray-600 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
+                    {/* Tier Text: Lebih kecil di mobile */}
+                    <span className="text-[8px] md:text-[9px] font-mono text-gray-600 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
                         [{item.tier}]
                     </span>
                 </div>
 
                 {/* Bottom Part: Name & Lore */}
                 <div>
-                  <h4 className="text-lg font-base text-white mb-1 group-hover:translate-x-1 transition-transform duration-300">
+                  {/* Name Text: text-sm (Mobile) vs text-lg (Desktop) */}
+                  <h4 className="text-sm md:text-lg font-base text-white mb-1 group-hover:translate-x-1 transition-transform duration-300">
                     {item.name}
                   </h4>
                   
-                  {/* Lore Reveal Effect */}
                   <div className="overflow-hidden h-0 group-hover:h-auto opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-                      <p className="text-[10px] text-amber-500/80 font-mono pt-1 leading-tight">
+                      {/* Lore Text: Hide di layar sangat kecil jika perlu, atau text-[9px] */}
+                      <p className="text-[9px] md:text-[10px] text-amber-500/80 font-mono pt-1 leading-tight">
                         &gt; {item.lore}
                       </p>
                   </div>
                   
-                  {/* Default subtitle */}
                   <div className="group-hover:hidden transition-all duration-300">
-                      <div className="h-0.5 w-8 bg-white/10 mt-2" />
+                      <div className="h-0.5 w-6 md:w-8 bg-white/10 mt-2" />
                   </div>
                 </div>
 
               </div>
 
               {/* Decorative Corner */}
-              <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Network size={12} className="text-amber-500/40" />
+              <div className="absolute bottom-0 right-0 p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Network size={10} className="md:w-3 md:h-3 text-amber-500/40" />
               </div>
             </motion.div>
           ))}
@@ -166,21 +170,21 @@ export default function TechStack() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="mt-20 border-t border-white/5 pt-8 flex flex-wrap justify-center md:justify-between gap-6 text-gray-600 font-mono text-[10px] uppercase tracking-widest"
+            className="mt-12 md:mt-20 border-t border-white/5 pt-6 md:pt-8 flex flex-wrap justify-center md:justify-between gap-4 md:gap-6 text-gray-600 font-mono text-[9px] md:text-[10px] uppercase tracking-widest"
         >
             <div className="flex items-center gap-2 hover:text-amber-500 transition-colors cursor-crosshair">
-                <Coffee size={14} /> 
-                <span>Matcha Intake: <span className="text-white">88%</span></span>
+                <Coffee size={12} className="md:w-[14px] md:h-[14px]" /> 
+                <span>Matcha: <span className="text-white">88%</span></span>
             </div>
             <div className="hidden md:block w-px h-3 bg-white/10" />
             <div className="flex items-center gap-2 hover:text-red-400 transition-colors cursor-crosshair">
-                <Ghost size={14} /> 
-                <span>Sanity Check: <span className="text-white">Critical</span></span>
+                <Ghost size={12} className="md:w-[14px] md:h-[14px]" /> 
+                <span>Sanity: <span className="text-white">Crit</span></span>
             </div>
             <div className="hidden md:block w-px h-3 bg-white/10" />
             <div className="flex items-center gap-2 hover:text-green-400 transition-colors cursor-crosshair">
-                <Bug size={14} /> 
-                <span>Bug Spawn Rate: <span className="text-white">Low</span></span>
+                <Bug size={12} className="md:w-[14px] md:h-[14px]" /> 
+                <span>Bugs: <span className="text-white">Low</span></span>
             </div>
         </motion.div>
 
