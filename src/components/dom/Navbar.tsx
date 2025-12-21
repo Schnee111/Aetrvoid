@@ -20,14 +20,14 @@ export default function Navbar({ onBGChange, currentBG }: NavbarProps) {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const diff = latest - lastY;
-    if (Math.abs(diff) > 3) {
-      if (diff > 0 && latest > 30 && !isMobileMenuOpen) { 
+    if (Math.abs(diff) > 0) {
+      if (diff > 0 && latest > 5 && !isMobileMenuOpen) { 
         setIsHidden(true);
       } else {
         setIsHidden(false);
       }
     }
-    setIsScrolled(latest > 30);
+    setIsScrolled(latest > 5);
     setLastY(latest);
   });
 
