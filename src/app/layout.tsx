@@ -20,11 +20,11 @@ const googleSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://aetr.space'),
   title: "AetrVoid",
-  description: "Kare's personal portfolio (waifus showcase) website showcasing projects, skills, and experience in web development and design.",
+  description: "Schnee's(daffa) personal portfolio website showcasing projects, skills, and experience in IT.",
   icons: {
     icon: {
         url: "/void_logo.png",
-        sizes: "300x300", // Untuk resolusi tinggi/mobile
+        sizes: "300x300", 
         type: "image/png",
       },
   },
