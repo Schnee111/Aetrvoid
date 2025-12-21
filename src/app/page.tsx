@@ -67,38 +67,40 @@ export default function Home() {
       {/* === SECTION PROJECTS === */}
       <div id="projects" ref={containerRef} className="relative z-20 w-full bg-black -mt-[20vh]">
         
-        {/* WRAPPER PARALLAX IMAGE */}
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
-              style={{ 
-                  y, 
-                  scale, 
-                  opacity, 
-                  willChange: "transform",
-                  backfaceVisibility: "hidden" 
-              }}
+              style={{ y, scale, opacity, willChange: "transform", backfaceVisibility: "hidden" }}
               className="relative w-full h-[90vh] sm:h-[90lvh] -bottom-[20vh]" 
             >
-                {/* GAMBAR */}
+                {/* CONTAINER VIDEO */}
                 <div 
-                   className="w-full h-full transform-gpu" // Force GPU
+                   className="w-full h-full transform-gpu"
                    style={{
+                      // Masking tetap dipakai agar transisi atas-bawah mulus
                       maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)',
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)'
                    }}
                 >
-                   <Image
-                     src="/images/angel.jpg"
-                     alt="Background"
-                     fill
-                     quality={60} 
-                     className="object-cover object-top blur-[3px] transform-gpu perspective-1000 translate-z-0" 
-                     sizes="100vw"
-                     priority
-                   />
+                   {/* PENTING: Tag Video HTML5 
+                      - autoPlay loop muted: Wajib agar jalan otomatis.
+                      - playsInline: WAJIB UNTUK IPHONE (kalau tidak, video akan fullscreen otomatis).
+                      - poster: Gambar thumbnail ringan yang muncul duluan sebelum video selesai loading (biar tidak blank hitam).
+                   */}
+                   <video
+                     autoPlay
+                     loop
+                     muted
+                     playsInline
+                     poster="/images/angel-preview.jpg" // Opsional: Buat screenshot frame pertama video
+                     className="w-full h-full object-cover opacity-80"
+                   >
+                     {/* Ganti path sesuai lokasi video Anda */}
+                     <source src="/videos/bg-video.mp4" type="video/mp4" />
+                   </video>
                 </div>
-                <div className="absolute inset-0 bg-black/50" />
                 
+                {/* Overlay tetap diperlukan agar teks di atasnya terbaca */}
+                <div className="absolute inset-0 bg-black/40" />
             </motion.div>
         </div>
 
@@ -116,14 +118,22 @@ export default function Home() {
       </div>
 
       {/* Section Stats */}
+      {/* Section Stats */}
       <div id="stats" ref={statsRef} className="relative z-20 py-40 overflow-hidden min-h-[90vh] flex items-center bg-black">
         
-        {/* PARALLAX IMAGE STATS */}
+        {/* PARALLAX VIDEO STATS */}
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
-              style={{ y: yStats, scale: scaleStats, opacity: opacityStats, willChange: "transform", backfaceVisibility: "hidden" }}
+              style={{ 
+                  y: yStats, 
+                  scale: scaleStats, 
+                  opacity: opacityStats, 
+                  willChange: "transform", 
+                  backfaceVisibility: "hidden" 
+              }}
               className="relative w-full h-[100vh] sm:h-[100lvh] -bottom-[10vh]"
             >
+               {/* MASKING CONTAINER */}
                <div 
                    className="w-full h-full transform-gpu"
                    style={{
@@ -131,26 +141,34 @@ export default function Home() {
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)'
                    }}
                 >
-                   {/* TERAPKAN LOGIKA YANG SAMA DI SINI */}
-                   <Image
-                     src="/images/slay.jpg" 
-                     alt="Stats Background"
-                     fill
-                     quality={60}
-                     className="object-cover blur-[2.5px] transform-gpu perspective-1000 translate-z-0" 
-                     sizes="100vw"
-                   />
+                   {/* VIDEO TAG HTML5 */}
+                   <video
+                     autoPlay
+                     loop
+                     muted
+                     playsInline
+                     // Poster wajib ada agar tidak "blink" hitam saat loading
+                     poster="/images/gargantua-preview.jpg" 
+                     className="w-full h-full object-cover"
+                   >
+                     {/* Ganti path video sesuai lokasi file Anda */}
+                     <source src="/videos/gargantua.mp4" type="video/mp4" />
+                   </video>
                 </div>
+
                 <div className="absolute inset-0 bg-black/70" />
             </motion.div>
         </div>
 
+        {/* Gradient Connector Atas */}
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
 
+        {/* Content Radar */}
         <div className="relative z-20 container mx-auto flex justify-center">
           <StatsRadar />
         </div>
         
+        {/* Gradient Connector Bawah */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
       </div>
