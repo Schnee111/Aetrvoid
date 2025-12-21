@@ -9,6 +9,8 @@ import Experience from "@/components/sections/Experience";
 import StatsRadar from "@/components/sections/StatsRadar";
 import Footer from "@/components/dom/Footer";
 import { useRef, useState } from "react";
+// 1. IMPORT IMAGE DARI NEXT
+import Image from "next/image"; 
 import { motion, useScroll, useTransform } from "framer-motion";
 
 // Lazy Load Backgrounds
@@ -62,56 +64,56 @@ export default function Home() {
         <TechStack />
       </section>
 
-      {/* === SECTION PROJECTS === */}\
+      {/* === SECTION PROJECTS === */}
       <div id="projects" ref={containerRef} className="relative z-20 w-full bg-black -mt-[20vh]">
         
         {/* WRAPPER PARALLAX IMAGE */}
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
-              style={{ y, scale, opacity }}
+              style={{ 
+                  y, 
+                  scale, 
+                  opacity, 
+                  willChange: "transform",
+                  backfaceVisibility: "hidden" 
+              }}
               className="relative w-full h-[90vh] sm:h-[90lvh] -bottom-[20vh]" 
             >
                 {/* GAMBAR */}
                 <div 
-                   className="w-full h-full"
+                   className="w-full h-full transform-gpu" // Force GPU
                    style={{
-                       // Masking Ganda: Atas memudar (nyambung ke TechStack), Bawah memudar (nyambung ke Stats)
                       maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)',
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)'
                    }}
                 >
-                   <img
+                   <Image
                      src="/images/angel.jpg"
                      alt="Background"
-                     className="w-full h-full object-cover object-top opacity-80 blur-[2.5px]" 
+                     fill
+                     quality={60} 
+                     className="object-cover object-top blur-[3px] transform-gpu perspective-1000 translate-z-0" 
+                     sizes="100vw"
+                     priority
                    />
                 </div>
-                {/* Overlay Gelap Tambahan */}
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/50" />
+                
             </motion.div>
         </div>
 
-        {/* 1. Atas: Nyambung ke TechStack */}
         <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black via-black/80 to-transparent z-10 pointer-events-none" />
-        
-        {/* 2. Bawah: Nyambung ke Stats */}
         <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none" />
 
-
-        {/* KONTEN UTAMA */}
         <div className="relative z-20 pb-24 pt-24">
           <Projects />
         </div>
 
       </div>
 
-      {/* =========================================== */}
-
       <div id="timeline" className="relative z-20 bg-black">
         <Experience />
       </div>
-
-      {/* =========================================== */}
 
       {/* Section Stats */}
       <div id="stats" ref={statsRef} className="relative z-20 py-40 overflow-hidden min-h-[90vh] flex items-center bg-black">
@@ -119,40 +121,36 @@ export default function Home() {
         {/* PARALLAX IMAGE STATS */}
         <div className="absolute inset-0 z-0 overflow-hidden">
             <motion.div
-              style={{ y: yStats, scale: scaleStats, opacity: opacityStats }}
+              style={{ y: yStats, scale: scaleStats, opacity: opacityStats, willChange: "transform", backfaceVisibility: "hidden" }}
               className="relative w-full h-[100vh] sm:h-[100lvh] -bottom-[10vh]"
             >
-               {/* MASKING IMAGE */}
                <div 
-                   className="w-full h-full"
+                   className="w-full h-full transform-gpu"
                    style={{
-                      // Masking halus di atas dan bawah agar menyatu dengan background hitam
                       maskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)',
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%)'
                    }}
                 >
-                   {/* GANTI GAMBAR DISINI: Gunakan gambar sci-fi/tech/grid */}
-                   <img
+                   {/* TERAPKAN LOGIKA YANG SAMA DI SINI */}
+                   <Image
                      src="/images/slay.jpg" 
                      alt="Stats Background"
-                     className="w-full h-full object-cover opacity-60 blur-[2px]" 
+                     fill
+                     quality={60}
+                     className="object-cover blur-[2.5px] transform-gpu perspective-1000 translate-z-0" 
+                     sizes="100vw"
                    />
                 </div>
-
-                {/* Overlay Gelap Tambahan (Agar Radar Chart terlihat jelas) */}
-                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 bg-black/70" />
             </motion.div>
         </div>
 
-        {/* Gradient Connector Atas (Nyambung ke Timeline) */}
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
 
-        {/* Content */}
         <div className="relative z-20 container mx-auto flex justify-center">
           <StatsRadar />
         </div>
         
-        {/* Gradient Connector Bawah (Nyambung ke Footer) */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
       </div>
