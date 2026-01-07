@@ -1,4 +1,4 @@
-# ✨ Lumina Web
+# ✨ AetrVoid
 
 A stunning, modern portfolio website built with Next.js 16, featuring immersive 3D backgrounds, smooth animations, and interactive particle effects. Lumina Web showcases a perfect blend of cutting-edge web technologies to create an engaging user experience.
 
