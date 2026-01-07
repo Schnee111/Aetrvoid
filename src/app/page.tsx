@@ -145,7 +145,7 @@ export default function Home() {
                      muted
                      playsInline
                      poster="/images/gargantua-preview.jpg" 
-                     className="w-full h-full object-cover" // Opacity dikurangi agar teks terbaca
+                     className="w-full h-full object-cover opacity-90" // Opacity dikurangi agar teks terbaca
                    >
                      <source src="/videos/gargantua.mp4" type="video/mp4" />
                    </video>
