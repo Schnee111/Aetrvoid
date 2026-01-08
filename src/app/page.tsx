@@ -8,10 +8,11 @@ import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
 import StatsRadar from "@/components/sections/StatsRadar";
 import Footer from "@/components/dom/Footer";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 // 1. IMPORT IMAGE DARI NEXT
 import Image from "next/image"; 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lazy Load Backgrounds
 const backgroundMap = {
@@ -23,8 +24,14 @@ const backgroundMap = {
 };
 
 export default function Home() {
+  const isMobile = useIsMobile();
   const [activeBG, setActiveBG] = useState<keyof typeof backgroundMap>("moon");
   const ActiveBackground = backgroundMap[activeBG];
+
+  // Set default background berdasarkan device
+  useEffect(() => {
+    setActiveBG(isMobile ? "ori" : "moon");
+  }, [isMobile]);
 
   // --- SETUP PARALLAX PROJECTS ---
   const containerRef = useRef(null);
