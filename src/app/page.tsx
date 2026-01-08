@@ -9,7 +9,6 @@ import Experience from "@/components/sections/Experience";
 import StatsRadar from "@/components/sections/StatsRadar";
 import Footer from "@/components/dom/Footer";
 import { useRef, useState, useEffect } from "react";
-// 1. IMPORT IMAGE DARI NEXT
 import Image from "next/image"; 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -25,13 +24,38 @@ const backgroundMap = {
 
 export default function Home() {
   const isMobile = useIsMobile();
-  const [activeBG, setActiveBG] = useState<keyof typeof backgroundMap>("moon");
+  const [activeBG, setActiveBG] = useState<keyof typeof backgroundMap>("ori");
+  const [showBackground, setShowBackground] = useState(true);
   const ActiveBackground = backgroundMap[activeBG];
 
   // Set default background berdasarkan device
   useEffect(() => {
     setActiveBG(isMobile ? "ori" : "moon");
   }, [isMobile]);
+
+  // UNMOUNT Background saat scroll keluar dari Hero
+  const heroRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Jika Hero section tidak terlihat (intersecting = false), unmount background
+          setShowBackground(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 } // Trigger saat 10% Hero masih terlihat
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, []);
 
   // --- SETUP PARALLAX PROJECTS ---
   const containerRef = useRef(null);
@@ -48,10 +72,9 @@ export default function Home() {
   const footerRef = useRef(null);
   const { scrollYProgress: footerScroll } = useScroll({
     target: footerRef,
-    offset: ["start end", "end end"] // Mulai saat footer masuk, selesai saat mentok bawah
+    offset: ["start end", "end end"]
   });
 
-  // Animasi Parallax Footer
   const yFooter = useTransform(footerScroll, [0, 1], ["-20%", "0%"]); 
   const opacityFooter = useTransform(footerScroll, [0, 0.3, 0.8, 1], [0, 1, 1, 0.6]);
 
@@ -60,9 +83,9 @@ export default function Home() {
       
       <Navbar onBGChange={setActiveBG} currentBG={activeBG} />
       
-      <section id="about" className="relative">
-        {/* Background 3D */}
-        <ActiveBackground />
+      <section id="about" ref={heroRef} className="relative">
+        {/* Background 3D - HANYA RENDER SAAT TERLIHAT */}
+        {showBackground && <ActiveBackground />}
         <Hero />
       </section>
 
@@ -79,16 +102,13 @@ export default function Home() {
               style={{ y, scale, opacity, willChange: "transform", backfaceVisibility: "hidden" }}
               className="relative w-full h-[90vh] sm:h-[90lvh] -bottom-[20vh]" 
             >
-                {/* CONTAINER VIDEO */}
                 <div 
                    className="w-full h-full transform-gpu"
                    style={{
-                      // Masking tetap dipakai agar transisi atas-bawah mulus
                       maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)',
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 55%, transparent 100%)'
                    }}
                 >
-                    {/* VIDEO HTML5 */}
                    <video
                      autoPlay
                      loop
@@ -97,12 +117,10 @@ export default function Home() {
                      poster="/images/angel-preview.jpg"
                      className="w-full h-full object-cover"
                    >
-                     {/* Ganti path sesuai lokasi video Anda */}
                      <source src="/videos/bg-video.mp4" type="video/mp4" />
                    </video>
                 </div>
                 
-                {/* Overlay tetap diperlukan agar teks di atasnya terbaca */}
                 <div className="absolute inset-0 bg-black/50" />
             </motion.div>
         </div>
@@ -122,7 +140,6 @@ export default function Home() {
 
       {/* Section Stats */}
       <div id="stats" className="relative z-20 py-20 bg-black flex items-center justify-center">
-        {/* Dekorasi Grid Tipis (Opsional) */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
         
         <div className="relative z-10 container mx-auto flex justify-center">
@@ -136,12 +153,11 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
             <motion.div
               style={{ y: yFooter, opacity: opacityFooter, willChange: "transform" }}
-              className="relative w-full h-[100%]" // Dibuat lebih tinggi untuk parallax
+              className="relative w-full h-[100%]"
             >
                <div 
                    className="w-full h-full transform-gpu"
                    style={{
-                      // Masking: Atas transparan (menyatu dengan Stats), Bawah agak gelap
                       maskImage: 'linear-gradient(to bottom, transparent 10%, black 40%, black 90%, black 100%)',
                       WebkitMaskImage: 'linear-gradient(to bottom, transparent 10%, black 40%, black 90%, black 100%)'
                    }}
@@ -152,13 +168,12 @@ export default function Home() {
                      muted
                      playsInline
                      poster="/images/gargantua-preview.jpg" 
-                     className="w-full h-full object-cover opacity-90" // Opacity dikurangi agar teks terbaca
+                     className="w-full h-full object-cover opacity-90"
                    >
                      <source src="/videos/gargantua.mp4" type="video/mp4" />
                    </video>
                 </div>
                 
-                {/* Overlay Gradient agar teks Footer Kontras */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
             </motion.div>
         </div>
