@@ -51,11 +51,11 @@ export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-black text-white font-sans selection:bg-white/30">
       
-      {/* Background 3D Global */}
-      <ActiveBackground />
       <Navbar onBGChange={setActiveBG} currentBG={activeBG} />
       
-      <section id="about">
+      <section id="about" className="relative">
+        {/* Background 3D */}
+        <ActiveBackground />
         <Hero />
       </section>
 
