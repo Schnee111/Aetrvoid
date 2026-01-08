@@ -195,7 +195,7 @@ export default function Projects() {
           
           <div className="py-16 md:py-32 text-center md:text-left flex flex-col items-center md:items-start">
              <div className="text-[10px] md:text-sm font-mono text-amber-500/50 mb-3 uppercase tracking-[0.5em]">
-                <TypewriterText text="Selected Waifus" />
+                <TypewriterText text="Selected Archives" />
              </div>
              <div className="text-2xl md:text-6xl text-white max-w-4xl tracking-tighter font-base leading-[1.1]">
                 <MaskedReveal 

@@ -47,15 +47,15 @@ export const waifus = [
     color: "from-purple-600 to-fuchsia-500", // Neon purple/Explosion
     image: "/images/waifus/reze.jpg",
   },
-  {
-    id: 6,
-    title: "Nino Nakano",
-    category: "The Quintessential Quintuplets",
-    description: "The second daughter of the Nakano quintuplets. She has a strong Tsundere personality, is highly protective of her sisters, an excellent cook, and possesses a high sense of fashion.",
-    tags: ["Tsundere", "Butterfly", "Cook", "Short Hair"],
-    color: "from-pink-500 to-purple-500", // Nino's signature purple/pink
-    image: "/images/waifus/nino.jpg",
-  },
+  // {
+  //   id: 6,
+  //   title: "Nino Nakano",
+  //   category: "The Quintessential Quintuplets",
+  //   description: "The second daughter of the Nakano quintuplets. She has a strong Tsundere personality, is highly protective of her sisters, an excellent cook, and possesses a high sense of fashion.",
+  //   tags: ["Tsundere", "Butterfly", "Cook", "Short Hair"],
+  //   color: "from-pink-500 to-purple-500", // Nino's signature purple/pink
+  //   image: "/images/waifus/nino.jpg",
+  // },
 
   // --- MANHWA CHARACTERS ---
   {
